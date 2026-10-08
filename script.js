@@ -244,3 +244,11 @@ tin.addEventListener("keydown", e => {
   $("tchips").appendChild(b);
 });
 say("Welcome. Type a command or tap one below. Start with 'help'.");
+fetch("https://ayabee.goatcounter.com/counter/TOTAL.json")
+  .then(r => r.ok ? r.json() : null)
+  .then(d => {
+    if (!d) return;
+    const n = parseInt(String(d.count).replace(/\D/g, ""), 10);
+    if (n >= 1) { $("views").textContent = n.toLocaleString("en-ZA"); $("viewsWrap").hidden = false; }
+  })
+  .catch(() => {});
